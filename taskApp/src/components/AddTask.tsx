@@ -17,12 +17,18 @@ export const AddTask = ({ onAddTask }: AddTaskProps) => {
   const handleBlur = (event: React.SyntheticEvent<HTMLInputElement>) => {
     setText("kamon kamonlets go lets go");
   };
+  const checkFocus = (event: React.MouseEvent<HTMLInputElement>) => {};
   console.log("addtext=>", addText);
   return (
     <>
       <input type={"text"} value={addText} onChange={handleTextInput} />
       <button onClick={handleAdd}>Add</button>
-      <input type={"checkbox"} onBlur={handleBlur} />
+      <input
+        type={"checkbox"}
+        onFocus={(e) => e.target.focus()}
+        onClick={(e) => e}
+        onBlur={handleBlur}
+      />
     </>
   );
 };
