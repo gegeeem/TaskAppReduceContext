@@ -4,7 +4,7 @@ import "./App.css";
 import { AddTask } from "./components/AddTask";
 
 function App() {
-  const [count, setCount] = useState<string>("priv");
+  const [count, setCount] = useState<string>("firts");
 
   return (
     <div className="App">
