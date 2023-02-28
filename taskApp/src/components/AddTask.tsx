@@ -14,7 +14,7 @@ export const AddTask = ({ onAddTask }: AddTaskProps) => {
     event.preventDefault();
     onAddTask(addText);
   };
-  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+  const handleBlur = (event: React.SyntheticEvent<HTMLInputElement>) => {
     event.preventDefault();
     setText("kamon kamonlets go lets go");
   };
