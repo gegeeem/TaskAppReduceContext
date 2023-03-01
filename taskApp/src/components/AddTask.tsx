@@ -26,9 +26,11 @@ export const AddTask = ({ onAddTask }: AddTaskProps) => {
       <input
         type={"checkbox"}
         id="ja"
-        onFocus={(e) => e.target.focus()}
-        onClick={(e) => document.getElementById("ja")?.focus()}
+        ref={"si"}
+        // onClick={(e) => document.getElementById("ja")?.focus()}
+        onClick={(e) => e}
         onBlur={handleBlur}
+        autoFocus={false}
       />
     </>
   );
