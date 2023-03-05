@@ -1,20 +1,52 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ContextTaskApp } from "./Context";
 
-type edit = "edit";
-type save = "save";
-interface TaskItemProps {
+type buttonValue = "edit" | "save";
+
+export interface TaskItemProps {
+  id: string;
   isChecked: boolean;
   text: string;
-  buttonValue: edit | save;
 }
+
 export const TaskItem = (props: TaskItemProps) => {
-  const [text, setText] = useState<string>("");
+  const chekingItemContext = useContext(ContextTaskApp);
+  const [text, setText] = useState<string>(props.text);
+  const [isChecking, setIsChecking] = useState<boolean>(props.isChecked);
+  const [buttonType, setButtonType] = useState<buttonValue>("edit");
+  const [focusOnInpute, setFocusOnInput] = useState<boolean>(false);
+
+  const editText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
+
+  const hanldeCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecking((prev) => !prev);
+    if (chekingItemContext?.isCheckin) {
+      chekingItemContext.isCheckin(props.id);
+    }
+  };
+  const buttonAction = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (buttonType == "edit") {
+      setButtonType("save");
+      setFocusOnInput(true);
+      document.getElementById("editing")?.focus();
+    }
+    if (buttonType == "save") {
+      setButtonType("edit");
+      setFocusOnInput(false);
+    }
+  };
+
+  console.log("chekingItemContext", chekingItemContext);
   return (
     <>
-      <input type={"checkbox"} checked={props.isChecked} />
-      <input type={"text"} value={props.text} />{" "}
-      <button value={props.buttonValue} />
-      <button value={"delete"} />
+      <input type={"checkbox"} checked={isChecking} onChange={hanldeCheck} />
+      <input id="editing" type={"text"} value={text} onChange={editText} />
+      <button value={buttonType} onClick={buttonAction}>
+        {buttonType}
+      </button>
+      <button>Delete</button>
     </>
   );
 };
