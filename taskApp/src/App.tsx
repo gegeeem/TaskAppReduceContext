@@ -12,10 +12,7 @@ function App() {
   return (
     <ContextTaskAppProvider>
       <div className="App">
-        <AddTask onAddTask={(e) => setCount(e)} />
-        {count}
-        <br />
-
+        <AddTask />
         <ListOfTaskItems />
       </div>
     </ContextTaskAppProvider>

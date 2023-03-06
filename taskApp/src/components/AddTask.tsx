@@ -1,8 +1,10 @@
-import { useState } from "react";
-type AddTaskProps = {
-  onAddTask: (e: string) => void;
-};
-export const AddTask = ({ onAddTask }: AddTaskProps) => {
+import { useContext, useState } from "react";
+import { ContextTaskApp } from "./Context";
+import { v4 } from "uuid";
+
+export const AddTask = () => {
+  const contextAppTask = useContext(ContextTaskApp);
+
   const [addText, setAddText] = useState<string>("");
 
   const handleTextInput = (
@@ -12,7 +14,12 @@ export const AddTask = ({ onAddTask }: AddTaskProps) => {
   };
   const handleAdd = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    onAddTask(addText);
+    if (contextAppTask.newTask)
+      contextAppTask.newTask({
+        id: v4(),
+        isChecked: false,
+        taskName: addText,
+      });
   };
   // const handleBlur = (event: React.SyntheticEvent<HTMLInputElement>) => {
   //   setText("kamon kamonlets go lets go");

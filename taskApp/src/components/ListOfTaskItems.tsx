@@ -9,7 +9,11 @@ export const ListOfTaskItems = () => {
     <ul>
       {hajde?.arrayLists?.map((el) => (
         <li id={el.id + 10}>
-          <TaskItem id={el.id} isChecked={el.isDone} text={el.taskName} />
+          <TaskItem
+            id={el.id}
+            isChecked={el.isChecked}
+            taskName={el.taskName}
+          />
         </li>
       ))}
     </ul>

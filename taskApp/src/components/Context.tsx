@@ -1,47 +1,48 @@
 import { createContext, useState } from "react";
 import { ListOfTaskItems } from "./ListOfTaskItems";
+import { TaskItemProps } from "./TaskItem";
 
-const firstList: ListOfTask[] = [
-  { id: "1", isDone: true, taskName: "be beeep" },
-  { id: "2", isDone: false, taskName: "ta daa!" },
+const firstList: TaskItemProps[] = [
+  { id: "1", isChecked: true, taskName: "be beeep" },
+  { id: "2", isChecked: false, taskName: "ta daa!" },
 ];
 
-interface ListOfTask {
-  id: string;
-  isDone: boolean;
-  taskName: string;
-}
 interface ContextTaskAppProps {
-  arrayLists?: ListOfTask[];
+  arrayLists: TaskItemProps[];
   isCheckin?: (id: string) => void;
+  newTask?: (task: TaskItemProps) => void;
 }
 const initalContextApp: ContextTaskAppProps = {
   arrayLists: firstList,
 };
 
-const ContextTaskApp = createContext<ContextTaskAppProps | undefined>(
-  initalContextApp
-);
+const ContextTaskApp = createContext<ContextTaskAppProps>(initalContextApp);
 
 const ContextTaskAppProvider = ({ children }: any) => {
-  const [listOfTask, setListOfTask] = useState<Array<ListOfTask> | undefined>(
-    firstList
-  );
+  const [listOfTask, setListOfTask] = useState<Array<TaskItemProps>>(firstList);
+
   const setChecking = (id: string) => {
     const newState = listOfTask?.map((el) => {
       if (el.id === id) {
-        el.isDone = !el.isDone;
+        el.isChecked = !el.isChecked;
         return el;
       } else return el;
     });
-    setListOfTask(listOfTask);
+    setListOfTask(newState);
   };
-  const hajde: ContextTaskAppProps = {
+
+  const addNewTask = (task: TaskItemProps) => {
+    setListOfTask((prev) => [...prev, task]);
+  };
+  const valueCntx: ContextTaskAppProps = {
     arrayLists: listOfTask,
     isCheckin: setChecking,
+    newTask: addNewTask,
   };
   return (
-    <ContextTaskApp.Provider value={hajde}>{children}</ContextTaskApp.Provider>
+    <ContextTaskApp.Provider value={valueCntx}>
+      {children}
+    </ContextTaskApp.Provider>
   );
 };
 export { ContextTaskApp, ContextTaskAppProvider };

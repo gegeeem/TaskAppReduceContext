@@ -6,12 +6,12 @@ type buttonValue = "edit" | "save";
 export interface TaskItemProps {
   id: string;
   isChecked: boolean;
-  text: string;
+  taskName: string;
 }
 
 export const TaskItem = (props: TaskItemProps) => {
   const chekingItemContext = useContext(ContextTaskApp);
-  const [text, setText] = useState<string>(props.text);
+  const [text, setText] = useState<string>(props.taskName);
   const [isChecking, setIsChecking] = useState<boolean>(props.isChecked);
   const [buttonType, setButtonType] = useState<buttonValue>("edit");
   const [focusOnInpute, setFocusOnInput] = useState<boolean>(false);
