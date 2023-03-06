@@ -11,6 +11,7 @@ interface ContextTaskAppProps {
   arrayLists: TaskItemProps[];
   isCheckin?: (id: string) => void;
   newTask?: (task: TaskItemProps) => void;
+  editTask?: (id: string, newName: string) => void;
 }
 const initalContextApp: ContextTaskAppProps = {
   arrayLists: firstList,
@@ -34,10 +35,22 @@ const ContextTaskAppProvider = ({ children }: any) => {
   const addNewTask = (task: TaskItemProps) => {
     setListOfTask((prev) => [...prev, task]);
   };
+
+  const editTaskName = (id: string, newTaskName: string) => {
+    const newTaskState = listOfTask?.map((el) => {
+      if (el.id === id) {
+        el.taskName = newTaskName;
+        return el;
+      } else return el;
+    });
+    setListOfTask(newTaskState);
+  };
+
   const valueCntx: ContextTaskAppProps = {
     arrayLists: listOfTask,
     isCheckin: setChecking,
     newTask: addNewTask,
+    editTask: editTaskName,
   };
   return (
     <ContextTaskApp.Provider value={valueCntx}>

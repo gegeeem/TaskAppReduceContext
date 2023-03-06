@@ -27,26 +27,29 @@ export const TaskItem = (props: TaskItemProps) => {
     }
   };
   const buttonAction = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (buttonType == "edit") {
-      setButtonType("save");
-      setFocusOnInput(true);
-      document.getElementById("editing")?.focus();
-    }
-    if (buttonType == "save") {
-      setButtonType("edit");
-      setFocusOnInput(false);
-    }
+    // if (buttonType == "edit") {
+    //   setButtonType("save");
+    //   setFocusOnInput(true);
+    //   document.getElementById("editing")?.focus();
+    // }
+    // if (buttonType == "save") {
+    //   setButtonType("edit");
+    //   setFocusOnInput(false);
+
+    // }
+    if (chekingItemContext.editTask)
+      chekingItemContext.editTask(props.id, text);
   };
 
   console.log("chekingItemContext", chekingItemContext);
   return (
-    <>
+    <li>
       <input type={"checkbox"} checked={isChecking} onChange={hanldeCheck} />
       <input id="editing" type={"text"} value={text} onChange={editText} />
       <button value={buttonType} onClick={buttonAction}>
         {buttonType}
       </button>
       <button>Delete</button>
-    </>
+    </li>
   );
 };
