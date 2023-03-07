@@ -7,8 +7,6 @@ import { ContextTaskAppProvider } from "./components/Context";
 import { ListOfTaskItems } from "./components/ListOfTaskItems";
 
 function App() {
-  const [count, setCount] = useState<string>("firts");
-
   return (
     <ContextTaskAppProvider>
       <div className="App">

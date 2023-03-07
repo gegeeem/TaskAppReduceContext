@@ -4,7 +4,7 @@ import { TaskItem, TaskItemProps } from "./TaskItem";
 
 export const ListOfTaskItems = () => {
   const hajde = useContext(ContextTaskApp);
-  console.log();
+  console.log(hajde.arrayLists);
   return (
     <ul>
       {hajde?.arrayLists?.map((el) => (
