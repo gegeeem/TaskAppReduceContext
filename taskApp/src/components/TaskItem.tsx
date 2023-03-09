@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ContextTaskApp } from "./Context";
 
 type buttonValue = "edit" | "save";
@@ -17,6 +17,7 @@ export const TaskItem = (props: TaskItemProps) => {
   // const [buttonType, setButtonType] = useState<buttonValue>("edit");
   const [focusOnInpute, setFocusOnInput] = useState<boolean>(false);
   const ref = useRef<HTMLInputElement>(null);
+  const anotherRef = useRef({ name: "Ich", username: "Nine" });
 
   const editText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
@@ -41,11 +42,11 @@ export const TaskItem = (props: TaskItemProps) => {
     // }
     e.preventDefault();
     setIsEditing((prev) => !prev);
-    if (isEditing) {
-      ref.current?.focus();
-    } else {
-      setFocusOnInput(false);
-    }
+    // if (isEditing) {
+    //   ref.current?.focus();
+    // } else {
+    //   setFocusOnInput(false);
+    // }
     if (chekingItemContext.editTask)
       chekingItemContext.editTask(props.id, text);
   };
@@ -53,6 +54,9 @@ export const TaskItem = (props: TaskItemProps) => {
     e.preventDefault();
     if (chekingItemContext.deleteTask) chekingItemContext.deleteTask(props.id);
   };
+  useEffect(() => {
+    if (isEditing) ref.current?.focus();
+  }, [isEditing]);
   return (
     <li>
       <input type={"checkbox"} checked={isChecking} onChange={hanldeCheck} />
@@ -75,6 +79,7 @@ export const TaskItem = (props: TaskItemProps) => {
             id={props.id}
             type={"text"}
             value={text}
+            ref={ref}
             onChange={editText}
             disabled={true}
           />
