@@ -25,6 +25,17 @@ export const AddTask = () => {
   //   setText("kamon kamonlets go lets go");
   // };
   const checkFocus = (event: React.MouseEvent<HTMLInputElement>) => {};
+  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      if (contextAppTask.newTask)
+        contextAppTask.newTask({
+          id: v4(),
+          isChecked: false,
+          taskName: addText,
+        });
+      e.currentTarget.select();
+    }
+  };
   console.log("addtext=>", addText);
   return (
     <>
@@ -33,6 +44,7 @@ export const AddTask = () => {
         value={addText}
         onChange={handleTextInput}
         onFocus={(e) => e.target.select()}
+        onKeyDown={handleEnter}
       />
       <button onClick={handleAdd}>Add</button>
       {/* <input
