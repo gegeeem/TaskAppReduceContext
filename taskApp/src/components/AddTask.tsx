@@ -28,7 +28,12 @@ export const AddTask = () => {
   console.log("addtext=>", addText);
   return (
     <>
-      <input type={"text"} value={addText} onChange={handleTextInput} />
+      <input
+        type={"text"}
+        value={addText}
+        onChange={handleTextInput}
+        onFocus={(e) => e.target.select()}
+      />
       <button onClick={handleAdd}>Add</button>
       {/* <input
         type={"checkbox"}
