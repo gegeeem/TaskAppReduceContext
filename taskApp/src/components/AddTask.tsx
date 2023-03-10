@@ -42,6 +42,7 @@ export const AddTask = () => {
       <input
         type={"text"}
         value={addText}
+        enterKeyHint="done"
         onChange={handleTextInput}
         onFocus={(e) => e.target.select()}
         onKeyDown={handleEnter}
