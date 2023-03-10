@@ -26,7 +26,7 @@ export const AddTask = () => {
   // };
   const checkFocus = (event: React.MouseEvent<HTMLInputElement>) => {};
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" || e.key === "Done" || e.key === "done") {
+    if (e.key === "Enter") {
       if (contextAppTask.newTask)
         contextAppTask.newTask({
           id: v4(),
