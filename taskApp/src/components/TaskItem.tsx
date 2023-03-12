@@ -14,10 +14,8 @@ export const TaskItem = (props: TaskItemProps) => {
   const [text, setText] = useState<string>(props.taskName);
   const [isChecking, setIsChecking] = useState<boolean>(props.isChecked);
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  // const [buttonType, setButtonType] = useState<buttonValue>("edit");
-  const [focusOnInpute, setFocusOnInput] = useState<boolean>(false);
+
   const ref = useRef<HTMLInputElement>(null);
-  const anotherRef = useRef({ name: "Ich", username: "Nine" });
 
   const editText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
@@ -54,6 +52,7 @@ export const TaskItem = (props: TaskItemProps) => {
     e.preventDefault();
     if (chekingItemContext.deleteTask) chekingItemContext.deleteTask(props.id);
   };
+
   useEffect(() => {
     if (isEditing) ref.current?.focus();
   }, [isEditing]);
